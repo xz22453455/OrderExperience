@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sss.oem.domain.dao.ViewWmsOperationMapper">
+  <resultMap id="BaseResultMap" type="com.sss.oem.domain.entity.ViewWmsOperation">
+    <result column="D_ID" jdbcType="INTEGER" property="dId" />
+    <result column="T_Type" jdbcType="INTEGER" property="tType" />
+    <result column="D_ParentID" jdbcType="VARCHAR" property="dParentid" />
+    <result column="ParentID" jdbcType="VARCHAR" property="parentid" />
+    <result column="ContractNo" jdbcType="VARCHAR" property="contractno" />
+    <result column="Pro_No" jdbcType="VARCHAR" property="proNo" />
+    <result column="Pro_Name" jdbcType="VARCHAR" property="proName" />
+    <result column="D_Type" jdbcType="VARCHAR" property="dType" />
+    <result column="D_Steel" jdbcType="VARCHAR" property="dSteel" />
+    <result column="D_Spec" jdbcType="VARCHAR" property="dSpec" />
+    <result column="D_FurnaceNo" jdbcType="VARCHAR" property="dFurnaceno" />
+    <result column="D_Unit" jdbcType="VARCHAR" property="dUnit" />
+    <result column="D_Quantity" jdbcType="INTEGER" property="dQuantity" />
+    <result column="D_Weight" jdbcType="DECIMAL" property="dWeight" />
+    <result column="D_Numbers" jdbcType="DECIMAL" property="dNumbers" />
+    <result column="WarehouseCode" jdbcType="VARCHAR" property="warehousecode" />
+    <result column="BinCode" jdbcType="VARCHAR" property="bincode" />
+    <result column="D_Create" jdbcType="VARCHAR" property="dCreate" />
+    <result column="D_CreateDate" jdbcType="VARCHAR" property="dCreatedate" />
+    <result column="D_BarCode" jdbcType="VARCHAR" property="dBarcode" />
+    <result column="D_RFID" jdbcType="VARCHAR" property="dRfid" />
+    <result column="binname" jdbcType="VARCHAR" property="binname" />
+    <result column="Warehousename" jdbcType="VARCHAR" property="warehousename" />
+    <result column="D_Standards" jdbcType="VARCHAR" property="dStandards" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    D_ID, T_Type, D_ParentID, ParentID, ContractNo, Pro_No, Pro_Name, D_Type, D_Steel, 
+    D_Spec, D_FurnaceNo, D_Unit, D_Quantity, D_Weight, D_Numbers, WarehouseCode, BinCode, 
+    D_Create, D_CreateDate, D_BarCode, D_RFID, binname, Warehousename, D_Standards
+  </sql>
+  <select id="selectByExample" parameterType="com.sss.oem.domain.entity.ViewWmsOperationCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from view_wms_operation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.sss.oem.domain.entity.ViewWmsOperationCriteria">
+    delete from view_wms_operation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sss.oem.domain.entity.ViewWmsOperation">
+    insert into view_wms_operation (D_ID, T_Type, D_ParentID, 
+      ParentID, ContractNo, Pro_No, 
+      Pro_Name, D_Type, D_Steel, 
+      D_Spec, D_FurnaceNo, D_Unit, 
+      D_Quantity, D_Weight, D_Numbers, 
+      WarehouseCode, BinCode, D_Create, 
+      D_CreateDate, D_BarCode, D_RFID, 
+      binname, Warehousename, D_Standards
+      )
+    values (#{dId,jdbcType=INTEGER}, #{tType,jdbcType=INTEGER}, #{dParentid,jdbcType=VARCHAR}, 
+      #{parentid,jdbcType=VARCHAR}, #{contractno,jdbcType=VARCHAR}, #{proNo,jdbcType=VARCHAR}, 
+      #{proName,jdbcType=VARCHAR}, #{dType,jdbcType=VARCHAR}, #{dSteel,jdbcType=VARCHAR}, 
+      #{dSpec,jdbcType=VARCHAR}, #{dFurnaceno,jdbcType=VARCHAR}, #{dUnit,jdbcType=VARCHAR}, 
+      #{dQuantity,jdbcType=INTEGER}, #{dWeight,jdbcType=DECIMAL}, #{dNumbers,jdbcType=DECIMAL}, 
+      #{warehousecode,jdbcType=VARCHAR}, #{bincode,jdbcType=VARCHAR}, #{dCreate,jdbcType=VARCHAR}, 
+      #{dCreatedate,jdbcType=VARCHAR}, #{dBarcode,jdbcType=VARCHAR}, #{dRfid,jdbcType=VARCHAR}, 
+      #{binname,jdbcType=VARCHAR}, #{warehousename,jdbcType=VARCHAR}, #{dStandards,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sss.oem.domain.entity.ViewWmsOperation">
+    insert into view_wms_operation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dId != null">
+        D_ID,
+      </if>
+      <if test="tType != null">
+        T_Type,
+      </if>
+      <if test="dParentid != null">
+        D_ParentID,
+      </if>
+      <if test="parentid != null">
+        ParentID,
+      </if>
+      <if test="contractno != null">
+        ContractNo,
+      </if>
+      <if test="proNo != null">
+        Pro_No,
+      </if>
+      <if test="proName != null">
+        Pro_Name,
+      </if>
+      <if test="dType != null">
+        D_Type,
+      </if>
+      <if test="dSteel != null">
+        D_Steel,
+      </if>
+      <if test="dSpec != null">
+        D_Spec,
+      </if>
+      <if test="dFurnaceno != null">
+        D_FurnaceNo,
+      </if>
+      <if test="dUnit != null">
+        D_Unit,
+      </if>
+      <if test="dQuantity != null">
+        D_Quantity,
+      </if>
+      <if test="dWeight != null">
+        D_Weight,
+      </if>
+      <if test="dNumbers != null">
+        D_Numbers,
+      </if>
+      <if test="warehousecode != null">
+        WarehouseCode,
+      </if>
+      <if test="bincode != null">
+        BinCode,
+      </if>
+      <if test="dCreate != null">
+        D_Create,
+      </if>
+      <if test="dCreatedate != null">
+        D_CreateDate,
+      </if>
+      <if test="dBarcode != null">
+        D_BarCode,
+      </if>
+      <if test="dRfid != null">
+        D_RFID,
+      </if>
+      <if test="binname != null">
+        binname,
+      </if>
+      <if test="warehousename != null">
+        Warehousename,
+      </if>
+      <if test="dStandards != null">
+        D_Standards,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dId != null">
+        #{dId,jdbcType=INTEGER},
+      </if>
+      <if test="tType != null">
+        #{tType,jdbcType=INTEGER},
+      </if>
+      <if test="dParentid != null">
+        #{dParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="contractno != null">
+        #{contractno,jdbcType=VARCHAR},
+      </if>
+      <if test="proNo != null">
+        #{proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="proName != null">
+        #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="dType != null">
+        #{dType,jdbcType=VARCHAR},
+      </if>
+      <if test="dSteel != null">
+        #{dSteel,jdbcType=VARCHAR},
+      </if>
+      <if test="dSpec != null">
+        #{dSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="dFurnaceno != null">
+        #{dFurnaceno,jdbcType=VARCHAR},
+      </if>
+      <if test="dUnit != null">
+        #{dUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="dQuantity != null">
+        #{dQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="dWeight != null">
+        #{dWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="dNumbers != null">
+        #{dNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="warehousecode != null">
+        #{warehousecode,jdbcType=VARCHAR},
+      </if>
+      <if test="bincode != null">
+        #{bincode,jdbcType=VARCHAR},
+      </if>
+      <if test="dCreate != null">
+        #{dCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="dCreatedate != null">
+        #{dCreatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="dBarcode != null">
+        #{dBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dRfid != null">
+        #{dRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="binname != null">
+        #{binname,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousename != null">
+        #{warehousename,jdbcType=VARCHAR},
+      </if>
+      <if test="dStandards != null">
+        #{dStandards,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sss.oem.domain.entity.ViewWmsOperationCriteria" resultType="java.lang.Long">
+    select count(*) from view_wms_operation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update view_wms_operation
+    <set>
+      <if test="record.dId != null">
+        D_ID = #{record.dId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tType != null">
+        T_Type = #{record.tType,jdbcType=INTEGER},
+      </if>
+      <if test="record.dParentid != null">
+        D_ParentID = #{record.dParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentid != null">
+        ParentID = #{record.parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractno != null">
+        ContractNo = #{record.contractno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proNo != null">
+        Pro_No = #{record.proNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proName != null">
+        Pro_Name = #{record.proName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dType != null">
+        D_Type = #{record.dType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSteel != null">
+        D_Steel = #{record.dSteel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSpec != null">
+        D_Spec = #{record.dSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dFurnaceno != null">
+        D_FurnaceNo = #{record.dFurnaceno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dUnit != null">
+        D_Unit = #{record.dUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dQuantity != null">
+        D_Quantity = #{record.dQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.dWeight != null">
+        D_Weight = #{record.dWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dNumbers != null">
+        D_Numbers = #{record.dNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="record.warehousecode != null">
+        WarehouseCode = #{record.warehousecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bincode != null">
+        BinCode = #{record.bincode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dCreate != null">
+        D_Create = #{record.dCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dCreatedate != null">
+        D_CreateDate = #{record.dCreatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dBarcode != null">
+        D_BarCode = #{record.dBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dRfid != null">
+        D_RFID = #{record.dRfid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.binname != null">
+        binname = #{record.binname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.warehousename != null">
+        Warehousename = #{record.warehousename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dStandards != null">
+        D_Standards = #{record.dStandards,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update view_wms_operation
+    set D_ID = #{record.dId,jdbcType=INTEGER},
+      T_Type = #{record.tType,jdbcType=INTEGER},
+      D_ParentID = #{record.dParentid,jdbcType=VARCHAR},
+      ParentID = #{record.parentid,jdbcType=VARCHAR},
+      ContractNo = #{record.contractno,jdbcType=VARCHAR},
+      Pro_No = #{record.proNo,jdbcType=VARCHAR},
+      Pro_Name = #{record.proName,jdbcType=VARCHAR},
+      D_Type = #{record.dType,jdbcType=VARCHAR},
+      D_Steel = #{record.dSteel,jdbcType=VARCHAR},
+      D_Spec = #{record.dSpec,jdbcType=VARCHAR},
+      D_FurnaceNo = #{record.dFurnaceno,jdbcType=VARCHAR},
+      D_Unit = #{record.dUnit,jdbcType=VARCHAR},
+      D_Quantity = #{record.dQuantity,jdbcType=INTEGER},
+      D_Weight = #{record.dWeight,jdbcType=DECIMAL},
+      D_Numbers = #{record.dNumbers,jdbcType=DECIMAL},
+      WarehouseCode = #{record.warehousecode,jdbcType=VARCHAR},
+      BinCode = #{record.bincode,jdbcType=VARCHAR},
+      D_Create = #{record.dCreate,jdbcType=VARCHAR},
+      D_CreateDate = #{record.dCreatedate,jdbcType=VARCHAR},
+      D_BarCode = #{record.dBarcode,jdbcType=VARCHAR},
+      D_RFID = #{record.dRfid,jdbcType=VARCHAR},
+      binname = #{record.binname,jdbcType=VARCHAR},
+      Warehousename = #{record.warehousename,jdbcType=VARCHAR},
+      D_Standards = #{record.dStandards,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.sss.oem.domain.entity.ViewWmsOperationCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from view_wms_operation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <cache />
+</mapper>

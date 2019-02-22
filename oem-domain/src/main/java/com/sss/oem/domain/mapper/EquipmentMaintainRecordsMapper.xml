@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sss.oem.domain.dao.DeliverySchedulesViewWmsOperationMapper">
+  <resultMap id="BaseResultMap" type="com.sss.oem.domain.entity.DeliverySchedulesViewWmsOperation">
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="maintenance_record_number" property="maintenanceRecordNumber" jdbcType="VARCHAR" />
+    <result column="devicename" property="devicename" jdbcType="VARCHAR" />
+    <result column="unit_type" property="unitType" jdbcType="VARCHAR" />
+    <result column="maintain_project" property="maintainProject" jdbcType="VARCHAR" />
+    <result column="maintain_scheme" property="maintainScheme" jdbcType="VARCHAR" />
+    <result column="maintain_date" property="maintainDate" jdbcType="TIMESTAMP" />
+    <result column="maintainer" property="maintainer" jdbcType="VARCHAR" />
+    <result column="need_change" property="needChange" jdbcType="VARCHAR" />
+    <result column="need_buy" property="needBuy" jdbcType="VARCHAR" />
+    <result column="estimated_arrival_time" property="estimatedArrivalTime" jdbcType="TIMESTAMP" />
+    <result column="reality_arrival_time" property="realityArrivalTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap type="com.mes.pojo.EquipmentMaintainRecords" id="withUserBaseResultMap" extends="BaseResultMap">
+  	<association property="deviceMan" javaType="com.mes.pojo.User">
+		<result column="devicer" property="name" jdbcType="VARCHAR" />
+  	</association>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, maintenance_record_number, devicename, unit_type, maintain_project, maintain_scheme, 
+    maintain_date, maintainer, need_change, need_buy, estimated_arrival_time, reality_arrival_time
+  </sql>
+  
+  <sql id="With_User_Base_Column_List" >
+    eq.id, eq.maintenance_record_number, eq.devicename, eq.unit_type, eq.maintain_project, eq.maintain_scheme, 
+    eq.maintain_date, eq.maintainer, eq.need_change, eq.need_buy, eq.estimated_arrival_time, eq.reality_arrival_time, u.name devicer 
+  </sql>
+  
+  <select id="findById" resultMap="withUserBaseResultMap">
+  	select 
+  	<include refid="With_User_Base_Column_List"/>
+  	from equipment_maintain_records eq left join sys_user u on eq.maintainer = u.id
+  	where eq.id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="dimFind" resultMap="withUserBaseResultMap">
+  	select
+  	<include refid="With_User_Base_Column_List"/>
+  	from equipment_maintain_records eq left join sys_user u on eq.maintainer = u.id
+  	where maintenance_record_number like "%"#{maintenanceRecordNumber,jdbcType=VARCHAR}"%"
+  </select>
+  
+  <select id="selectWithUser" resultMap="withUserBaseResultMap">
+  	select
+  	<include refid="With_User_Base_Column_List"/>
+  	from equipment_maintain_records eq left join sys_user u on eq.maintainer = u.id
+  </select>
+  
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mes.pojo.EquipmentMaintainRecordsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from equipment_maintain_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from equipment_maintain_records
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from equipment_maintain_records
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mes.pojo.EquipmentMaintainRecordsExample" >
+    delete from equipment_maintain_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mes.pojo.EquipmentMaintainRecords" >
+    insert into equipment_maintain_records (id, maintenance_record_number, devicename, 
+      unit_type, maintain_project, maintain_scheme, 
+      maintain_date, maintainer, need_change, 
+      need_buy, estimated_arrival_time, reality_arrival_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{maintenanceRecordNumber,jdbcType=VARCHAR}, #{devicename,jdbcType=VARCHAR}, 
+      #{unitType,jdbcType=VARCHAR}, #{maintainProject,jdbcType=VARCHAR}, #{maintainScheme,jdbcType=VARCHAR}, 
+      #{maintainDate,jdbcType=TIMESTAMP}, #{maintainer,jdbcType=VARCHAR}, #{needChange,jdbcType=VARCHAR}, 
+      #{needBuy,jdbcType=VARCHAR}, #{estimatedArrivalTime,jdbcType=TIMESTAMP}, #{realityArrivalTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mes.pojo.EquipmentMaintainRecords" >
+    insert into equipment_maintain_records
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="maintenanceRecordNumber != null" >
+        maintenance_record_number,
+      </if>
+      <if test="devicename != null" >
+        devicename,
+      </if>
+      <if test="unitType != null" >
+        unit_type,
+      </if>
+      <if test="maintainProject != null" >
+        maintain_project,
+      </if>
+      <if test="maintainScheme != null" >
+        maintain_scheme,
+      </if>
+      <if test="maintainDate != null" >
+        maintain_date,
+      </if>
+      <if test="maintainer != null" >
+        maintainer,
+      </if>
+      <if test="needChange != null" >
+        need_change,
+      </if>
+      <if test="needBuy != null" >
+        need_buy,
+      </if>
+      <if test="estimatedArrivalTime != null" >
+        estimated_arrival_time,
+      </if>
+      <if test="realityArrivalTime != null" >
+        reality_arrival_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="maintenanceRecordNumber != null" >
+        #{maintenanceRecordNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="unitType != null" >
+        #{unitType,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainProject != null" >
+        #{maintainProject,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainScheme != null" >
+        #{maintainScheme,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainDate != null" >
+        #{maintainDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maintainer != null" >
+        #{maintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="needChange != null" >
+        #{needChange,jdbcType=VARCHAR},
+      </if>
+      <if test="needBuy != null" >
+        #{needBuy,jdbcType=VARCHAR},
+      </if>
+      <if test="estimatedArrivalTime != null" >
+        #{estimatedArrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realityArrivalTime != null" >
+        #{realityArrivalTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mes.pojo.EquipmentMaintainRecordsExample" resultType="java.lang.Integer" >
+    select count(*) from equipment_maintain_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update equipment_maintain_records
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.maintenanceRecordNumber != null" >
+        maintenance_record_number = #{record.maintenanceRecordNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devicename != null" >
+        devicename = #{record.devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitType != null" >
+        unit_type = #{record.unitType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintainProject != null" >
+        maintain_project = #{record.maintainProject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintainScheme != null" >
+        maintain_scheme = #{record.maintainScheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintainDate != null" >
+        maintain_date = #{record.maintainDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.maintainer != null" >
+        maintainer = #{record.maintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needChange != null" >
+        need_change = #{record.needChange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needBuy != null" >
+        need_buy = #{record.needBuy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.estimatedArrivalTime != null" >
+        estimated_arrival_time = #{record.estimatedArrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.realityArrivalTime != null" >
+        reality_arrival_time = #{record.realityArrivalTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update equipment_maintain_records
+    set id = #{record.id,jdbcType=INTEGER},
+      maintenance_record_number = #{record.maintenanceRecordNumber,jdbcType=VARCHAR},
+      devicename = #{record.devicename,jdbcType=VARCHAR},
+      unit_type = #{record.unitType,jdbcType=VARCHAR},
+      maintain_project = #{record.maintainProject,jdbcType=VARCHAR},
+      maintain_scheme = #{record.maintainScheme,jdbcType=VARCHAR},
+      maintain_date = #{record.maintainDate,jdbcType=TIMESTAMP},
+      maintainer = #{record.maintainer,jdbcType=VARCHAR},
+      need_change = #{record.needChange,jdbcType=VARCHAR},
+      need_buy = #{record.needBuy,jdbcType=VARCHAR},
+      estimated_arrival_time = #{record.estimatedArrivalTime,jdbcType=TIMESTAMP},
+      reality_arrival_time = #{record.realityArrivalTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mes.pojo.EquipmentMaintainRecords" >
+    update equipment_maintain_records
+    <set >
+      <if test="maintenanceRecordNumber != null" >
+        maintenance_record_number = #{maintenanceRecordNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="devicename != null" >
+        devicename = #{devicename,jdbcType=VARCHAR},
+      </if>
+      <if test="unitType != null" >
+        unit_type = #{unitType,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainProject != null" >
+        maintain_project = #{maintainProject,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainScheme != null" >
+        maintain_scheme = #{maintainScheme,jdbcType=VARCHAR},
+      </if>
+      <if test="maintainDate != null" >
+        maintain_date = #{maintainDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="maintainer != null" >
+        maintainer = #{maintainer,jdbcType=VARCHAR},
+      </if>
+      <if test="needChange != null" >
+        need_change = #{needChange,jdbcType=VARCHAR},
+      </if>
+      <if test="needBuy != null" >
+        need_buy = #{needBuy,jdbcType=VARCHAR},
+      </if>
+      <if test="estimatedArrivalTime != null" >
+        estimated_arrival_time = #{estimatedArrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realityArrivalTime != null" >
+        reality_arrival_time = #{realityArrivalTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mes.pojo.EquipmentMaintainRecords" >
+    update equipment_maintain_records
+    set maintenance_record_number = #{maintenanceRecordNumber,jdbcType=VARCHAR},
+      devicename = #{devicename,jdbcType=VARCHAR},
+      unit_type = #{unitType,jdbcType=VARCHAR},
+      maintain_project = #{maintainProject,jdbcType=VARCHAR},
+      maintain_scheme = #{maintainScheme,jdbcType=VARCHAR},
+      maintain_date = #{maintainDate,jdbcType=TIMESTAMP},
+      maintainer = #{maintainer,jdbcType=VARCHAR},
+      need_change = #{needChange,jdbcType=VARCHAR},
+      need_buy = #{needBuy,jdbcType=VARCHAR},
+      estimated_arrival_time = #{estimatedArrivalTime,jdbcType=TIMESTAMP},
+      reality_arrival_time = #{realityArrivalTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

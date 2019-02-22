@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sss.oem.domain.dao.DeliverySchedulesMapper">
+  <resultMap id="BaseResultMap" type="com.sss.oem.domain.entity.DeliverySchedules">
+    <id column="D_Id" jdbcType="INTEGER" property="dId" />
+    <result column="D_No" jdbcType="VARCHAR" property="dNo" />
+    <result column="D_Source" jdbcType="VARCHAR" property="dSource" />
+    <result column="D_CustomerNo" jdbcType="VARCHAR" property="dCustomerno" />
+    <result column="D_ContractNo" jdbcType="VARCHAR" property="dContractno" />
+    <result column="DeliveryDate" jdbcType="VARCHAR" property="deliverydate" />
+    <result column="OrderDate" jdbcType="VARCHAR" property="orderdate" />
+    <result column="Package_Requirements" jdbcType="VARCHAR" property="packageRequirements" />
+    <result column="Settlement" jdbcType="VARCHAR" property="settlement" />
+    <result column="D_State" jdbcType="INTEGER" property="dState" />
+    <result column="D_Create" jdbcType="VARCHAR" property="dCreate" />
+    <result column="D_CreateDate" jdbcType="VARCHAR" property="dCreatedate" />
+    <result column="D_Audting" jdbcType="VARCHAR" property="dAudting" />
+    <result column="D_AudtingDate" jdbcType="VARCHAR" property="dAudtingdate" />
+    <result column="D_Urgency" jdbcType="INTEGER" property="dUrgency" />
+    <result column="DeptID" jdbcType="INTEGER" property="deptid" />
+    <result column="UserCode" jdbcType="VARCHAR" property="usercode" />
+    <result column="plan_date" jdbcType="VARCHAR" property="planDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.sss.oem.domain.entity.DeliverySchedulesWithBLOBs">
+    <result column="Special_Requirements" jdbcType="LONGVARCHAR" property="specialRequirements" />
+    <result column="SprayWord_Requirements" jdbcType="LONGVARCHAR" property="spraywordRequirements" />
+    <result column="Package_RequirementsExt" jdbcType="LONGVARCHAR" property="packageRequirementsext" />
+    <result column="Tolerances" jdbcType="LONGVARCHAR" property="tolerances" />
+    <result column="SettlementExt" jdbcType="LONGVARCHAR" property="settlementext" />
+    <result column="D_UrgencyText" jdbcType="LONGVARCHAR" property="dUrgencytext" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="JoinResultMap" type="com.sss.oem.domain.entity.DeliverySchedules">
+    <association property="vwo" javaType="com.sss.oem.domain.entity.ViewWmsOperation">
+      <result column="TotalWeight" jdbcType="DECIMAL" property="dWeight"></result>
+    </association>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    D_Id, D_No, D_Source, D_CustomerNo, D_ContractNo, DeliveryDate, OrderDate, Package_Requirements, 
+    Settlement, D_State, D_Create, D_CreateDate, D_Audting, D_AudtingDate, D_Urgency, 
+    DeptID, UserCode, plan_date
+  </sql>
+  <sql id="Blob_Column_List">
+    Special_Requirements, SprayWord_Requirements, Package_RequirementsExt, Tolerances, 
+    SettlementExt, D_UrgencyText
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.sss.oem.domain.entity.DeliverySchedulesCriteria" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from delivery_schedules
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.sss.oem.domain.entity.DeliverySchedulesCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from delivery_schedules
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from delivery_schedules
+    where D_Id = #{dId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from delivery_schedules
+    where D_Id = #{dId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sss.oem.domain.entity.DeliverySchedulesCriteria">
+    delete from delivery_schedules
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sss.oem.domain.entity.DeliverySchedulesWithBLOBs">
+    insert into delivery_schedules (D_Id, D_No, D_Source, 
+      D_CustomerNo, D_ContractNo, DeliveryDate, 
+      OrderDate, Package_Requirements, Settlement, 
+      D_State, D_Create, D_CreateDate, 
+      D_Audting, D_AudtingDate, D_Urgency, 
+      DeptID, UserCode, plan_date, 
+      Special_Requirements, SprayWord_Requirements, 
+      Package_RequirementsExt, Tolerances, 
+      SettlementExt, D_UrgencyText)
+    values (#{dId,jdbcType=INTEGER}, #{dNo,jdbcType=VARCHAR}, #{dSource,jdbcType=VARCHAR}, 
+      #{dCustomerno,jdbcType=VARCHAR}, #{dContractno,jdbcType=VARCHAR}, #{deliverydate,jdbcType=VARCHAR}, 
+      #{orderdate,jdbcType=VARCHAR}, #{packageRequirements,jdbcType=VARCHAR}, #{settlement,jdbcType=VARCHAR}, 
+      #{dState,jdbcType=INTEGER}, #{dCreate,jdbcType=VARCHAR}, #{dCreatedate,jdbcType=VARCHAR}, 
+      #{dAudting,jdbcType=VARCHAR}, #{dAudtingdate,jdbcType=VARCHAR}, #{dUrgency,jdbcType=INTEGER}, 
+      #{deptid,jdbcType=INTEGER}, #{usercode,jdbcType=VARCHAR}, #{planDate,jdbcType=VARCHAR}, 
+      #{specialRequirements,jdbcType=LONGVARCHAR}, #{spraywordRequirements,jdbcType=LONGVARCHAR}, 
+      #{packageRequirementsext,jdbcType=LONGVARCHAR}, #{tolerances,jdbcType=LONGVARCHAR}, 
+      #{settlementext,jdbcType=LONGVARCHAR}, #{dUrgencytext,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sss.oem.domain.entity.DeliverySchedulesWithBLOBs">
+    insert into delivery_schedules
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dId != null">
+        D_Id,
+      </if>
+      <if test="dNo != null">
+        D_No,
+      </if>
+      <if test="dSource != null">
+        D_Source,
+      </if>
+      <if test="dCustomerno != null">
+        D_CustomerNo,
+      </if>
+      <if test="dContractno != null">
+        D_ContractNo,
+      </if>
+      <if test="deliverydate != null">
+        DeliveryDate,
+      </if>
+      <if test="orderdate != null">
+        OrderDate,
+      </if>
+      <if test="packageRequirements != null">
+        Package_Requirements,
+      </if>
+      <if test="settlement != null">
+        Settlement,
+      </if>
+      <if test="dState != null">
+        D_State,
+      </if>
+      <if test="dCreate != null">
+        D_Create,
+      </if>
+      <if test="dCreatedate != null">
+        D_CreateDate,
+      </if>
+      <if test="dAudting != null">
+        D_Audting,
+      </if>
+      <if test="dAudtingdate != null">
+        D_AudtingDate,
+      </if>
+      <if test="dUrgency != null">
+        D_Urgency,
+      </if>
+      <if test="deptid != null">
+        DeptID,
+      </if>
+      <if test="usercode != null">
+        UserCode,
+      </if>
+      <if test="planDate != null">
+        plan_date,
+      </if>
+      <if test="specialRequirements != null">
+        Special_Requirements,
+      </if>
+      <if test="spraywordRequirements != null">
+        SprayWord_Requirements,
+      </if>
+      <if test="packageRequirementsext != null">
+        Package_RequirementsExt,
+      </if>
+      <if test="tolerances != null">
+        Tolerances,
+      </if>
+      <if test="settlementext != null">
+        SettlementExt,
+      </if>
+      <if test="dUrgencytext != null">
+        D_UrgencyText,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dId != null">
+        #{dId,jdbcType=INTEGER},
+      </if>
+      <if test="dNo != null">
+        #{dNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dSource != null">
+        #{dSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dCustomerno != null">
+        #{dCustomerno,jdbcType=VARCHAR},
+      </if>
+      <if test="dContractno != null">
+        #{dContractno,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverydate != null">
+        #{deliverydate,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdate != null">
+        #{orderdate,jdbcType=VARCHAR},
+      </if>
+      <if test="packageRequirements != null">
+        #{packageRequirements,jdbcType=VARCHAR},
+      </if>
+      <if test="settlement != null">
+        #{settlement,jdbcType=VARCHAR},
+      </if>
+      <if test="dState != null">
+        #{dState,jdbcType=INTEGER},
+      </if>
+      <if test="dCreate != null">
+        #{dCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="dCreatedate != null">
+        #{dCreatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="dAudting != null">
+        #{dAudting,jdbcType=VARCHAR},
+      </if>
+      <if test="dAudtingdate != null">
+        #{dAudtingdate,jdbcType=VARCHAR},
+      </if>
+      <if test="dUrgency != null">
+        #{dUrgency,jdbcType=INTEGER},
+      </if>
+      <if test="deptid != null">
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="usercode != null">
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="planDate != null">
+        #{planDate,jdbcType=VARCHAR},
+      </if>
+      <if test="specialRequirements != null">
+        #{specialRequirements,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="spraywordRequirements != null">
+        #{spraywordRequirements,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="packageRequirementsext != null">
+        #{packageRequirementsext,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tolerances != null">
+        #{tolerances,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="settlementext != null">
+        #{settlementext,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dUrgencytext != null">
+        #{dUrgencytext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sss.oem.domain.entity.DeliverySchedulesCriteria" resultType="java.lang.Long">
+    select count(*) from delivery_schedules
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update delivery_schedules
+    <set>
+      <if test="record.dId != null">
+        D_Id = #{record.dId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dNo != null">
+        D_No = #{record.dNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSource != null">
+        D_Source = #{record.dSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dCustomerno != null">
+        D_CustomerNo = #{record.dCustomerno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dContractno != null">
+        D_ContractNo = #{record.dContractno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliverydate != null">
+        DeliveryDate = #{record.deliverydate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderdate != null">
+        OrderDate = #{record.orderdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageRequirements != null">
+        Package_Requirements = #{record.packageRequirements,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settlement != null">
+        Settlement = #{record.settlement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dState != null">
+        D_State = #{record.dState,jdbcType=INTEGER},
+      </if>
+      <if test="record.dCreate != null">
+        D_Create = #{record.dCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dCreatedate != null">
+        D_CreateDate = #{record.dCreatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dAudting != null">
+        D_Audting = #{record.dAudting,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dAudtingdate != null">
+        D_AudtingDate = #{record.dAudtingdate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dUrgency != null">
+        D_Urgency = #{record.dUrgency,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptid != null">
+        DeptID = #{record.deptid,jdbcType=INTEGER},
+      </if>
+      <if test="record.usercode != null">
+        UserCode = #{record.usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planDate != null">
+        plan_date = #{record.planDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialRequirements != null">
+        Special_Requirements = #{record.specialRequirements,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.spraywordRequirements != null">
+        SprayWord_Requirements = #{record.spraywordRequirements,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.packageRequirementsext != null">
+        Package_RequirementsExt = #{record.packageRequirementsext,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.tolerances != null">
+        Tolerances = #{record.tolerances,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.settlementext != null">
+        SettlementExt = #{record.settlementext,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.dUrgencytext != null">
+        D_UrgencyText = #{record.dUrgencytext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update delivery_schedules
+    set D_Id = #{record.dId,jdbcType=INTEGER},
+      D_No = #{record.dNo,jdbcType=VARCHAR},
+      D_Source = #{record.dSource,jdbcType=VARCHAR},
+      D_CustomerNo = #{record.dCustomerno,jdbcType=VARCHAR},
+      D_ContractNo = #{record.dContractno,jdbcType=VARCHAR},
+      DeliveryDate = #{record.deliverydate,jdbcType=VARCHAR},
+      OrderDate = #{record.orderdate,jdbcType=VARCHAR},
+      Package_Requirements = #{record.packageRequirements,jdbcType=VARCHAR},
+      Settlement = #{record.settlement,jdbcType=VARCHAR},
+      D_State = #{record.dState,jdbcType=INTEGER},
+      D_Create = #{record.dCreate,jdbcType=VARCHAR},
+      D_CreateDate = #{record.dCreatedate,jdbcType=VARCHAR},
+      D_Audting = #{record.dAudting,jdbcType=VARCHAR},
+      D_AudtingDate = #{record.dAudtingdate,jdbcType=VARCHAR},
+      D_Urgency = #{record.dUrgency,jdbcType=INTEGER},
+      DeptID = #{record.deptid,jdbcType=INTEGER},
+      UserCode = #{record.usercode,jdbcType=VARCHAR},
+      plan_date = #{record.planDate,jdbcType=VARCHAR},
+      Special_Requirements = #{record.specialRequirements,jdbcType=LONGVARCHAR},
+      SprayWord_Requirements = #{record.spraywordRequirements,jdbcType=LONGVARCHAR},
+      Package_RequirementsExt = #{record.packageRequirementsext,jdbcType=LONGVARCHAR},
+      Tolerances = #{record.tolerances,jdbcType=LONGVARCHAR},
+      SettlementExt = #{record.settlementext,jdbcType=LONGVARCHAR},
+      D_UrgencyText = #{record.dUrgencytext,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update delivery_schedules
+    set D_Id = #{record.dId,jdbcType=INTEGER},
+      D_No = #{record.dNo,jdbcType=VARCHAR},
+      D_Source = #{record.dSource,jdbcType=VARCHAR},
+      D_CustomerNo = #{record.dCustomerno,jdbcType=VARCHAR},
+      D_ContractNo = #{record.dContractno,jdbcType=VARCHAR},
+      DeliveryDate = #{record.deliverydate,jdbcType=VARCHAR},
+      OrderDate = #{record.orderdate,jdbcType=VARCHAR},
+      Package_Requirements = #{record.packageRequirements,jdbcType=VARCHAR},
+      Settlement = #{record.settlement,jdbcType=VARCHAR},
+      D_State = #{record.dState,jdbcType=INTEGER},
+      D_Create = #{record.dCreate,jdbcType=VARCHAR},
+      D_CreateDate = #{record.dCreatedate,jdbcType=VARCHAR},
+      D_Audting = #{record.dAudting,jdbcType=VARCHAR},
+      D_AudtingDate = #{record.dAudtingdate,jdbcType=VARCHAR},
+      D_Urgency = #{record.dUrgency,jdbcType=INTEGER},
+      DeptID = #{record.deptid,jdbcType=INTEGER},
+      UserCode = #{record.usercode,jdbcType=VARCHAR},
+      plan_date = #{record.planDate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sss.oem.domain.entity.DeliverySchedulesWithBLOBs">
+    update delivery_schedules
+    <set>
+      <if test="dNo != null">
+        D_No = #{dNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dSource != null">
+        D_Source = #{dSource,jdbcType=VARCHAR},
+      </if>
+      <if test="dCustomerno != null">
+        D_CustomerNo = #{dCustomerno,jdbcType=VARCHAR},
+      </if>
+      <if test="dContractno != null">
+        D_ContractNo = #{dContractno,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverydate != null">
+        DeliveryDate = #{deliverydate,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdate != null">
+        OrderDate = #{orderdate,jdbcType=VARCHAR},
+      </if>
+      <if test="packageRequirements != null">
+        Package_Requirements = #{packageRequirements,jdbcType=VARCHAR},
+      </if>
+      <if test="settlement != null">
+        Settlement = #{settlement,jdbcType=VARCHAR},
+      </if>
+      <if test="dState != null">
+        D_State = #{dState,jdbcType=INTEGER},
+      </if>
+      <if test="dCreate != null">
+        D_Create = #{dCreate,jdbcType=VARCHAR},
+      </if>
+      <if test="dCreatedate != null">
+        D_CreateDate = #{dCreatedate,jdbcType=VARCHAR},
+      </if>
+      <if test="dAudting != null">
+        D_Audting = #{dAudting,jdbcType=VARCHAR},
+      </if>
+      <if test="dAudtingdate != null">
+        D_AudtingDate = #{dAudtingdate,jdbcType=VARCHAR},
+      </if>
+      <if test="dUrgency != null">
+        D_Urgency = #{dUrgency,jdbcType=INTEGER},
+      </if>
+      <if test="deptid != null">
+        DeptID = #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="usercode != null">
+        UserCode = #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="planDate != null">
+        plan_date = #{planDate,jdbcType=VARCHAR},
+      </if>
+      <if test="specialRequirements != null">
+        Special_Requirements = #{specialRequirements,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="spraywordRequirements != null">
+        SprayWord_Requirements = #{spraywordRequirements,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="packageRequirementsext != null">
+        Package_RequirementsExt = #{packageRequirementsext,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tolerances != null">
+        Tolerances = #{tolerances,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="settlementext != null">
+        SettlementExt = #{settlementext,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dUrgencytext != null">
+        D_UrgencyText = #{dUrgencytext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where D_Id = #{dId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.sss.oem.domain.entity.DeliverySchedulesWithBLOBs">
+    update delivery_schedules
+    set D_No = #{dNo,jdbcType=VARCHAR},
+      D_Source = #{dSource,jdbcType=VARCHAR},
+      D_CustomerNo = #{dCustomerno,jdbcType=VARCHAR},
+      D_ContractNo = #{dContractno,jdbcType=VARCHAR},
+      DeliveryDate = #{deliverydate,jdbcType=VARCHAR},
+      OrderDate = #{orderdate,jdbcType=VARCHAR},
+      Package_Requirements = #{packageRequirements,jdbcType=VARCHAR},
+      Settlement = #{settlement,jdbcType=VARCHAR},
+      D_State = #{dState,jdbcType=INTEGER},
+      D_Create = #{dCreate,jdbcType=VARCHAR},
+      D_CreateDate = #{dCreatedate,jdbcType=VARCHAR},
+      D_Audting = #{dAudting,jdbcType=VARCHAR},
+      D_AudtingDate = #{dAudtingdate,jdbcType=VARCHAR},
+      D_Urgency = #{dUrgency,jdbcType=INTEGER},
+      DeptID = #{deptid,jdbcType=INTEGER},
+      UserCode = #{usercode,jdbcType=VARCHAR},
+      plan_date = #{planDate,jdbcType=VARCHAR},
+      Special_Requirements = #{specialRequirements,jdbcType=LONGVARCHAR},
+      SprayWord_Requirements = #{spraywordRequirements,jdbcType=LONGVARCHAR},
+      Package_RequirementsExt = #{packageRequirementsext,jdbcType=LONGVARCHAR},
+      Tolerances = #{tolerances,jdbcType=LONGVARCHAR},
+      SettlementExt = #{settlementext,jdbcType=LONGVARCHAR},
+      D_UrgencyText = #{dUrgencytext,jdbcType=LONGVARCHAR}
+    where D_Id = #{dId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sss.oem.domain.entity.DeliverySchedules">
+    update delivery_schedules
+    set D_No = #{dNo,jdbcType=VARCHAR},
+      D_Source = #{dSource,jdbcType=VARCHAR},
+      D_CustomerNo = #{dCustomerno,jdbcType=VARCHAR},
+      D_ContractNo = #{dContractno,jdbcType=VARCHAR},
+      DeliveryDate = #{deliverydate,jdbcType=VARCHAR},
+      OrderDate = #{orderdate,jdbcType=VARCHAR},
+      Package_Requirements = #{packageRequirements,jdbcType=VARCHAR},
+      Settlement = #{settlement,jdbcType=VARCHAR},
+      D_State = #{dState,jdbcType=INTEGER},
+      D_Create = #{dCreate,jdbcType=VARCHAR},
+      D_CreateDate = #{dCreatedate,jdbcType=VARCHAR},
+      D_Audting = #{dAudting,jdbcType=VARCHAR},
+      D_AudtingDate = #{dAudtingdate,jdbcType=VARCHAR},
+      D_Urgency = #{dUrgency,jdbcType=INTEGER},
+      DeptID = #{deptid,jdbcType=INTEGER},
+      UserCode = #{usercode,jdbcType=VARCHAR},
+      plan_date = #{planDate,jdbcType=VARCHAR}
+    where D_Id = #{dId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithBLOBsWithRowbounds" parameterType="com.sss.oem.domain.entity.DeliverySchedulesCriteria" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from delivery_schedules
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleWithRowbounds" parameterType="com.sss.oem.domain.entity.DeliverySchedulesCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from delivery_schedules
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="findById" parameterType="String" resultMap="JoinResultMap" >
+    SELECT
+	D_ContractNo,
+	DeliveryDate,
+	SUM(D_Weight) TotalWeight
+FROM
+	delivery_schedules ds
+INNER JOIN view_wms_operation vwo ON ds.D_ContractNo = vwo.ContractNo
+WHERE
+	D_CustomerNo = #{id}
+AND concat(
+	substring_index(
+		substring_index(D_ContractNo, '-', 2),
+		'-',
+		1
+	),
+	substring_index(
+		substring_index(D_ContractNo, '-', 2),
+		'-',
+		- 1
+	)
+) IN (
+	SELECT
+		concat(
+			substring_index(
+				substring_index(ContractNo, '-', 2),
+				'-',
+				1
+			),
+			substring_index(
+				substring_index(ContractNo, '-', 2),
+				'-',
+				- 1
+			)
+		)
+	FROM
+		view_wms_operation
+)
+GROUP BY
+	D_ContractNo
+  </select>
+  <cache />
+</mapper>

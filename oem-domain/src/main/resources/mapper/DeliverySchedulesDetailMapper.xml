@@ -1,0 +1,1112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sss.oem.domain.dao.DeliverySchedulesDetailMapper">
+  <resultMap id="BaseResultMap" type="com.sss.oem.domain.entity.DeliverySchedulesDetail">
+    <id column="D_Id" jdbcType="INTEGER" property="dId" />
+    <result column="D_No" jdbcType="VARCHAR" property="dNo" />
+    <result column="D_Order" jdbcType="INTEGER" property="dOrder" />
+    <result column="ContractNo" jdbcType="VARCHAR" property="contractno" />
+    <result column="D_Name" jdbcType="VARCHAR" property="dName" />
+    <result column="D_Type" jdbcType="VARCHAR" property="dType" />
+    <result column="D_Steel" jdbcType="VARCHAR" property="dSteel" />
+    <result column="D_Spec" jdbcType="VARCHAR" property="dSpec" />
+    <result column="D_NPS" jdbcType="VARCHAR" property="dNps" />
+    <result column="D_Quantity" jdbcType="INTEGER" property="dQuantity" />
+    <result column="D_Unit" jdbcType="VARCHAR" property="dUnit" />
+    <result column="D_Number" jdbcType="INTEGER" property="dNumber" />
+    <result column="D_Weight" jdbcType="DECIMAL" property="dWeight" />
+    <result column="D_Numbers" jdbcType="DECIMAL" property="dNumbers" />
+    <result column="D_Weights" jdbcType="DECIMAL" property="dWeights" />
+    <result column="S_Quantity" jdbcType="INTEGER" property="sQuantity" />
+    <result column="S_Unit" jdbcType="VARCHAR" property="sUnit" />
+    <result column="S_Number" jdbcType="INTEGER" property="sNumber" />
+    <result column="S_Weight" jdbcType="DECIMAL" property="sWeight" />
+    <result column="S_Numbers" jdbcType="DECIMAL" property="sNumbers" />
+    <result column="S_Weights" jdbcType="DECIMAL" property="sWeights" />
+    <result column="M_Quantity" jdbcType="INTEGER" property="mQuantity" />
+    <result column="M_Unit" jdbcType="VARCHAR" property="mUnit" />
+    <result column="M_Number" jdbcType="INTEGER" property="mNumber" />
+    <result column="M_Weight" jdbcType="DECIMAL" property="mWeight" />
+    <result column="M_Numbers" jdbcType="DECIMAL" property="mNumbers" />
+    <result column="M_Weights" jdbcType="DECIMAL" property="mWeights" />
+    <result column="R_Quantity" jdbcType="INTEGER" property="rQuantity" />
+    <result column="R_Unit" jdbcType="VARCHAR" property="rUnit" />
+    <result column="R_Number" jdbcType="INTEGER" property="rNumber" />
+    <result column="R_Weight" jdbcType="DECIMAL" property="rWeight" />
+    <result column="R_Numbers" jdbcType="DECIMAL" property="rNumbers" />
+    <result column="R_Weights" jdbcType="DECIMAL" property="rWeights" />
+    <result column="D_External" jdbcType="DECIMAL" property="dExternal" />
+    <result column="D_External_Start" jdbcType="VARCHAR" property="dExternalStart" />
+    <result column="D_External_End" jdbcType="VARCHAR" property="dExternalEnd" />
+    <result column="D_physicochemical" jdbcType="DECIMAL" property="dPhysicochemical" />
+    <result column="D_physicochemical_Start" jdbcType="VARCHAR" property="dPhysicochemicalStart" />
+    <result column="D_physicochemical_End" jdbcType="VARCHAR" property="dPhysicochemicalEnd" />
+    <result column="D_Check" jdbcType="DECIMAL" property="dCheck" />
+    <result column="D_Check_Start" jdbcType="VARCHAR" property="dCheckStart" />
+    <result column="D_Check_End" jdbcType="VARCHAR" property="dCheckEnd" />
+    <result column="D_lossless" jdbcType="DECIMAL" property="dLossless" />
+    <result column="D_lossless_Start" jdbcType="VARCHAR" property="dLosslessStart" />
+    <result column="D_lossless_End" jdbcType="VARCHAR" property="dLosslessEnd" />
+    <result column="D_packaging" jdbcType="DECIMAL" property="dPackaging" />
+    <result column="D_packaging_Start" jdbcType="VARCHAR" property="dPackagingStart" />
+    <result column="D_packaging_End" jdbcType="VARCHAR" property="dPackagingEnd" />
+    <result column="D_percent" jdbcType="INTEGER" property="dPercent" />
+    <result column="D_verify" jdbcType="VARCHAR" property="dVerify" />
+    <result column="D_Check_type" jdbcType="VARCHAR" property="dCheckType" />
+    <result column="D_Standards" jdbcType="VARCHAR" property="dStandards" />
+    <result column="D_Supply" jdbcType="VARCHAR" property="dSupply" />
+    <result column="D_FurnaceNo" jdbcType="VARCHAR" property="dFurnaceno" />
+    <result column="D_HeatNo" jdbcType="VARCHAR" property="dHeatno" />
+    <result column="D_BoxNo" jdbcType="VARCHAR" property="dBoxno" />
+    <result column="D_State" jdbcType="INTEGER" property="dState" />
+    <result column="D_IsSingle" jdbcType="INTEGER" property="dIssingle" />
+    <result column="DeptID" jdbcType="INTEGER" property="deptid" />
+    <result column="IsShow" jdbcType="INTEGER" property="isshow" />
+    <result column="D_Remark" jdbcType="VARCHAR" property="dRemark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    D_Id, D_No, D_Order, ContractNo, D_Name, D_Type, D_Steel, D_Spec, D_NPS, D_Quantity, 
+    D_Unit, D_Number, D_Weight, D_Numbers, D_Weights, S_Quantity, S_Unit, S_Number, S_Weight, 
+    S_Numbers, S_Weights, M_Quantity, M_Unit, M_Number, M_Weight, M_Numbers, M_Weights, 
+    R_Quantity, R_Unit, R_Number, R_Weight, R_Numbers, R_Weights, D_External, D_External_Start, 
+    D_External_End, D_physicochemical, D_physicochemical_Start, D_physicochemical_End, 
+    D_Check, D_Check_Start, D_Check_End, D_lossless, D_lossless_Start, D_lossless_End, 
+    D_packaging, D_packaging_Start, D_packaging_End, D_percent, D_verify, D_Check_type, 
+    D_Standards, D_Supply, D_FurnaceNo, D_HeatNo, D_BoxNo, D_State, D_IsSingle, DeptID, 
+    IsShow, D_Remark
+  </sql>
+  <select id="selectByExample" parameterType="com.sss.oem.domain.entity.DeliverySchedulesDetailCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from delivery_schedules_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from delivery_schedules_detail
+    where D_Id = #{dId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from delivery_schedules_detail
+    where D_Id = #{dId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sss.oem.domain.entity.DeliverySchedulesDetailCriteria">
+    delete from delivery_schedules_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sss.oem.domain.entity.DeliverySchedulesDetail">
+    insert into delivery_schedules_detail (D_Id, D_No, D_Order, 
+      ContractNo, D_Name, D_Type, 
+      D_Steel, D_Spec, D_NPS, 
+      D_Quantity, D_Unit, D_Number, 
+      D_Weight, D_Numbers, D_Weights, 
+      S_Quantity, S_Unit, S_Number, 
+      S_Weight, S_Numbers, S_Weights, 
+      M_Quantity, M_Unit, M_Number, 
+      M_Weight, M_Numbers, M_Weights, 
+      R_Quantity, R_Unit, R_Number, 
+      R_Weight, R_Numbers, R_Weights, 
+      D_External, D_External_Start, D_External_End, 
+      D_physicochemical, D_physicochemical_Start, 
+      D_physicochemical_End, D_Check, D_Check_Start, 
+      D_Check_End, D_lossless, D_lossless_Start, 
+      D_lossless_End, D_packaging, D_packaging_Start, 
+      D_packaging_End, D_percent, D_verify, 
+      D_Check_type, D_Standards, D_Supply, 
+      D_FurnaceNo, D_HeatNo, D_BoxNo, 
+      D_State, D_IsSingle, DeptID, 
+      IsShow, D_Remark)
+    values (#{dId,jdbcType=INTEGER}, #{dNo,jdbcType=VARCHAR}, #{dOrder,jdbcType=INTEGER}, 
+      #{contractno,jdbcType=VARCHAR}, #{dName,jdbcType=VARCHAR}, #{dType,jdbcType=VARCHAR}, 
+      #{dSteel,jdbcType=VARCHAR}, #{dSpec,jdbcType=VARCHAR}, #{dNps,jdbcType=VARCHAR}, 
+      #{dQuantity,jdbcType=INTEGER}, #{dUnit,jdbcType=VARCHAR}, #{dNumber,jdbcType=INTEGER}, 
+      #{dWeight,jdbcType=DECIMAL}, #{dNumbers,jdbcType=DECIMAL}, #{dWeights,jdbcType=DECIMAL}, 
+      #{sQuantity,jdbcType=INTEGER}, #{sUnit,jdbcType=VARCHAR}, #{sNumber,jdbcType=INTEGER}, 
+      #{sWeight,jdbcType=DECIMAL}, #{sNumbers,jdbcType=DECIMAL}, #{sWeights,jdbcType=DECIMAL}, 
+      #{mQuantity,jdbcType=INTEGER}, #{mUnit,jdbcType=VARCHAR}, #{mNumber,jdbcType=INTEGER}, 
+      #{mWeight,jdbcType=DECIMAL}, #{mNumbers,jdbcType=DECIMAL}, #{mWeights,jdbcType=DECIMAL}, 
+      #{rQuantity,jdbcType=INTEGER}, #{rUnit,jdbcType=VARCHAR}, #{rNumber,jdbcType=INTEGER}, 
+      #{rWeight,jdbcType=DECIMAL}, #{rNumbers,jdbcType=DECIMAL}, #{rWeights,jdbcType=DECIMAL}, 
+      #{dExternal,jdbcType=DECIMAL}, #{dExternalStart,jdbcType=VARCHAR}, #{dExternalEnd,jdbcType=VARCHAR}, 
+      #{dPhysicochemical,jdbcType=DECIMAL}, #{dPhysicochemicalStart,jdbcType=VARCHAR}, 
+      #{dPhysicochemicalEnd,jdbcType=VARCHAR}, #{dCheck,jdbcType=DECIMAL}, #{dCheckStart,jdbcType=VARCHAR}, 
+      #{dCheckEnd,jdbcType=VARCHAR}, #{dLossless,jdbcType=DECIMAL}, #{dLosslessStart,jdbcType=VARCHAR}, 
+      #{dLosslessEnd,jdbcType=VARCHAR}, #{dPackaging,jdbcType=DECIMAL}, #{dPackagingStart,jdbcType=VARCHAR}, 
+      #{dPackagingEnd,jdbcType=VARCHAR}, #{dPercent,jdbcType=INTEGER}, #{dVerify,jdbcType=VARCHAR}, 
+      #{dCheckType,jdbcType=VARCHAR}, #{dStandards,jdbcType=VARCHAR}, #{dSupply,jdbcType=VARCHAR}, 
+      #{dFurnaceno,jdbcType=VARCHAR}, #{dHeatno,jdbcType=VARCHAR}, #{dBoxno,jdbcType=VARCHAR}, 
+      #{dState,jdbcType=INTEGER}, #{dIssingle,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, 
+      #{isshow,jdbcType=INTEGER}, #{dRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sss.oem.domain.entity.DeliverySchedulesDetail">
+    insert into delivery_schedules_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dId != null">
+        D_Id,
+      </if>
+      <if test="dNo != null">
+        D_No,
+      </if>
+      <if test="dOrder != null">
+        D_Order,
+      </if>
+      <if test="contractno != null">
+        ContractNo,
+      </if>
+      <if test="dName != null">
+        D_Name,
+      </if>
+      <if test="dType != null">
+        D_Type,
+      </if>
+      <if test="dSteel != null">
+        D_Steel,
+      </if>
+      <if test="dSpec != null">
+        D_Spec,
+      </if>
+      <if test="dNps != null">
+        D_NPS,
+      </if>
+      <if test="dQuantity != null">
+        D_Quantity,
+      </if>
+      <if test="dUnit != null">
+        D_Unit,
+      </if>
+      <if test="dNumber != null">
+        D_Number,
+      </if>
+      <if test="dWeight != null">
+        D_Weight,
+      </if>
+      <if test="dNumbers != null">
+        D_Numbers,
+      </if>
+      <if test="dWeights != null">
+        D_Weights,
+      </if>
+      <if test="sQuantity != null">
+        S_Quantity,
+      </if>
+      <if test="sUnit != null">
+        S_Unit,
+      </if>
+      <if test="sNumber != null">
+        S_Number,
+      </if>
+      <if test="sWeight != null">
+        S_Weight,
+      </if>
+      <if test="sNumbers != null">
+        S_Numbers,
+      </if>
+      <if test="sWeights != null">
+        S_Weights,
+      </if>
+      <if test="mQuantity != null">
+        M_Quantity,
+      </if>
+      <if test="mUnit != null">
+        M_Unit,
+      </if>
+      <if test="mNumber != null">
+        M_Number,
+      </if>
+      <if test="mWeight != null">
+        M_Weight,
+      </if>
+      <if test="mNumbers != null">
+        M_Numbers,
+      </if>
+      <if test="mWeights != null">
+        M_Weights,
+      </if>
+      <if test="rQuantity != null">
+        R_Quantity,
+      </if>
+      <if test="rUnit != null">
+        R_Unit,
+      </if>
+      <if test="rNumber != null">
+        R_Number,
+      </if>
+      <if test="rWeight != null">
+        R_Weight,
+      </if>
+      <if test="rNumbers != null">
+        R_Numbers,
+      </if>
+      <if test="rWeights != null">
+        R_Weights,
+      </if>
+      <if test="dExternal != null">
+        D_External,
+      </if>
+      <if test="dExternalStart != null">
+        D_External_Start,
+      </if>
+      <if test="dExternalEnd != null">
+        D_External_End,
+      </if>
+      <if test="dPhysicochemical != null">
+        D_physicochemical,
+      </if>
+      <if test="dPhysicochemicalStart != null">
+        D_physicochemical_Start,
+      </if>
+      <if test="dPhysicochemicalEnd != null">
+        D_physicochemical_End,
+      </if>
+      <if test="dCheck != null">
+        D_Check,
+      </if>
+      <if test="dCheckStart != null">
+        D_Check_Start,
+      </if>
+      <if test="dCheckEnd != null">
+        D_Check_End,
+      </if>
+      <if test="dLossless != null">
+        D_lossless,
+      </if>
+      <if test="dLosslessStart != null">
+        D_lossless_Start,
+      </if>
+      <if test="dLosslessEnd != null">
+        D_lossless_End,
+      </if>
+      <if test="dPackaging != null">
+        D_packaging,
+      </if>
+      <if test="dPackagingStart != null">
+        D_packaging_Start,
+      </if>
+      <if test="dPackagingEnd != null">
+        D_packaging_End,
+      </if>
+      <if test="dPercent != null">
+        D_percent,
+      </if>
+      <if test="dVerify != null">
+        D_verify,
+      </if>
+      <if test="dCheckType != null">
+        D_Check_type,
+      </if>
+      <if test="dStandards != null">
+        D_Standards,
+      </if>
+      <if test="dSupply != null">
+        D_Supply,
+      </if>
+      <if test="dFurnaceno != null">
+        D_FurnaceNo,
+      </if>
+      <if test="dHeatno != null">
+        D_HeatNo,
+      </if>
+      <if test="dBoxno != null">
+        D_BoxNo,
+      </if>
+      <if test="dState != null">
+        D_State,
+      </if>
+      <if test="dIssingle != null">
+        D_IsSingle,
+      </if>
+      <if test="deptid != null">
+        DeptID,
+      </if>
+      <if test="isshow != null">
+        IsShow,
+      </if>
+      <if test="dRemark != null">
+        D_Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dId != null">
+        #{dId,jdbcType=INTEGER},
+      </if>
+      <if test="dNo != null">
+        #{dNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dOrder != null">
+        #{dOrder,jdbcType=INTEGER},
+      </if>
+      <if test="contractno != null">
+        #{contractno,jdbcType=VARCHAR},
+      </if>
+      <if test="dName != null">
+        #{dName,jdbcType=VARCHAR},
+      </if>
+      <if test="dType != null">
+        #{dType,jdbcType=VARCHAR},
+      </if>
+      <if test="dSteel != null">
+        #{dSteel,jdbcType=VARCHAR},
+      </if>
+      <if test="dSpec != null">
+        #{dSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="dNps != null">
+        #{dNps,jdbcType=VARCHAR},
+      </if>
+      <if test="dQuantity != null">
+        #{dQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="dUnit != null">
+        #{dUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="dNumber != null">
+        #{dNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dWeight != null">
+        #{dWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="dNumbers != null">
+        #{dNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="dWeights != null">
+        #{dWeights,jdbcType=DECIMAL},
+      </if>
+      <if test="sQuantity != null">
+        #{sQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="sUnit != null">
+        #{sUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="sNumber != null">
+        #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="sWeight != null">
+        #{sWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="sNumbers != null">
+        #{sNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="sWeights != null">
+        #{sWeights,jdbcType=DECIMAL},
+      </if>
+      <if test="mQuantity != null">
+        #{mQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="mUnit != null">
+        #{mUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="mNumber != null">
+        #{mNumber,jdbcType=INTEGER},
+      </if>
+      <if test="mWeight != null">
+        #{mWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="mNumbers != null">
+        #{mNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="mWeights != null">
+        #{mWeights,jdbcType=DECIMAL},
+      </if>
+      <if test="rQuantity != null">
+        #{rQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="rUnit != null">
+        #{rUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="rNumber != null">
+        #{rNumber,jdbcType=INTEGER},
+      </if>
+      <if test="rWeight != null">
+        #{rWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="rNumbers != null">
+        #{rNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="rWeights != null">
+        #{rWeights,jdbcType=DECIMAL},
+      </if>
+      <if test="dExternal != null">
+        #{dExternal,jdbcType=DECIMAL},
+      </if>
+      <if test="dExternalStart != null">
+        #{dExternalStart,jdbcType=VARCHAR},
+      </if>
+      <if test="dExternalEnd != null">
+        #{dExternalEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="dPhysicochemical != null">
+        #{dPhysicochemical,jdbcType=DECIMAL},
+      </if>
+      <if test="dPhysicochemicalStart != null">
+        #{dPhysicochemicalStart,jdbcType=VARCHAR},
+      </if>
+      <if test="dPhysicochemicalEnd != null">
+        #{dPhysicochemicalEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="dCheck != null">
+        #{dCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="dCheckStart != null">
+        #{dCheckStart,jdbcType=VARCHAR},
+      </if>
+      <if test="dCheckEnd != null">
+        #{dCheckEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="dLossless != null">
+        #{dLossless,jdbcType=DECIMAL},
+      </if>
+      <if test="dLosslessStart != null">
+        #{dLosslessStart,jdbcType=VARCHAR},
+      </if>
+      <if test="dLosslessEnd != null">
+        #{dLosslessEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="dPackaging != null">
+        #{dPackaging,jdbcType=DECIMAL},
+      </if>
+      <if test="dPackagingStart != null">
+        #{dPackagingStart,jdbcType=VARCHAR},
+      </if>
+      <if test="dPackagingEnd != null">
+        #{dPackagingEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="dPercent != null">
+        #{dPercent,jdbcType=INTEGER},
+      </if>
+      <if test="dVerify != null">
+        #{dVerify,jdbcType=VARCHAR},
+      </if>
+      <if test="dCheckType != null">
+        #{dCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="dStandards != null">
+        #{dStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="dSupply != null">
+        #{dSupply,jdbcType=VARCHAR},
+      </if>
+      <if test="dFurnaceno != null">
+        #{dFurnaceno,jdbcType=VARCHAR},
+      </if>
+      <if test="dHeatno != null">
+        #{dHeatno,jdbcType=VARCHAR},
+      </if>
+      <if test="dBoxno != null">
+        #{dBoxno,jdbcType=VARCHAR},
+      </if>
+      <if test="dState != null">
+        #{dState,jdbcType=INTEGER},
+      </if>
+      <if test="dIssingle != null">
+        #{dIssingle,jdbcType=INTEGER},
+      </if>
+      <if test="deptid != null">
+        #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="isshow != null">
+        #{isshow,jdbcType=INTEGER},
+      </if>
+      <if test="dRemark != null">
+        #{dRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sss.oem.domain.entity.DeliverySchedulesDetailCriteria" resultType="java.lang.Long">
+    select count(*) from delivery_schedules_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update delivery_schedules_detail
+    <set>
+      <if test="record.dId != null">
+        D_Id = #{record.dId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dNo != null">
+        D_No = #{record.dNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dOrder != null">
+        D_Order = #{record.dOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.contractno != null">
+        ContractNo = #{record.contractno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dName != null">
+        D_Name = #{record.dName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dType != null">
+        D_Type = #{record.dType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSteel != null">
+        D_Steel = #{record.dSteel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSpec != null">
+        D_Spec = #{record.dSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dNps != null">
+        D_NPS = #{record.dNps,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dQuantity != null">
+        D_Quantity = #{record.dQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.dUnit != null">
+        D_Unit = #{record.dUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dNumber != null">
+        D_Number = #{record.dNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.dWeight != null">
+        D_Weight = #{record.dWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dNumbers != null">
+        D_Numbers = #{record.dNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dWeights != null">
+        D_Weights = #{record.dWeights,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sQuantity != null">
+        S_Quantity = #{record.sQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.sUnit != null">
+        S_Unit = #{record.sUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sNumber != null">
+        S_Number = #{record.sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.sWeight != null">
+        S_Weight = #{record.sWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sNumbers != null">
+        S_Numbers = #{record.sNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sWeights != null">
+        S_Weights = #{record.sWeights,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mQuantity != null">
+        M_Quantity = #{record.mQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.mUnit != null">
+        M_Unit = #{record.mUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mNumber != null">
+        M_Number = #{record.mNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.mWeight != null">
+        M_Weight = #{record.mWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mNumbers != null">
+        M_Numbers = #{record.mNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mWeights != null">
+        M_Weights = #{record.mWeights,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rQuantity != null">
+        R_Quantity = #{record.rQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.rUnit != null">
+        R_Unit = #{record.rUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rNumber != null">
+        R_Number = #{record.rNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.rWeight != null">
+        R_Weight = #{record.rWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rNumbers != null">
+        R_Numbers = #{record.rNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rWeights != null">
+        R_Weights = #{record.rWeights,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dExternal != null">
+        D_External = #{record.dExternal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dExternalStart != null">
+        D_External_Start = #{record.dExternalStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dExternalEnd != null">
+        D_External_End = #{record.dExternalEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dPhysicochemical != null">
+        D_physicochemical = #{record.dPhysicochemical,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dPhysicochemicalStart != null">
+        D_physicochemical_Start = #{record.dPhysicochemicalStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dPhysicochemicalEnd != null">
+        D_physicochemical_End = #{record.dPhysicochemicalEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dCheck != null">
+        D_Check = #{record.dCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dCheckStart != null">
+        D_Check_Start = #{record.dCheckStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dCheckEnd != null">
+        D_Check_End = #{record.dCheckEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dLossless != null">
+        D_lossless = #{record.dLossless,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dLosslessStart != null">
+        D_lossless_Start = #{record.dLosslessStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dLosslessEnd != null">
+        D_lossless_End = #{record.dLosslessEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dPackaging != null">
+        D_packaging = #{record.dPackaging,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dPackagingStart != null">
+        D_packaging_Start = #{record.dPackagingStart,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dPackagingEnd != null">
+        D_packaging_End = #{record.dPackagingEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dPercent != null">
+        D_percent = #{record.dPercent,jdbcType=INTEGER},
+      </if>
+      <if test="record.dVerify != null">
+        D_verify = #{record.dVerify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dCheckType != null">
+        D_Check_type = #{record.dCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dStandards != null">
+        D_Standards = #{record.dStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dSupply != null">
+        D_Supply = #{record.dSupply,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dFurnaceno != null">
+        D_FurnaceNo = #{record.dFurnaceno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dHeatno != null">
+        D_HeatNo = #{record.dHeatno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dBoxno != null">
+        D_BoxNo = #{record.dBoxno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dState != null">
+        D_State = #{record.dState,jdbcType=INTEGER},
+      </if>
+      <if test="record.dIssingle != null">
+        D_IsSingle = #{record.dIssingle,jdbcType=INTEGER},
+      </if>
+      <if test="record.deptid != null">
+        DeptID = #{record.deptid,jdbcType=INTEGER},
+      </if>
+      <if test="record.isshow != null">
+        IsShow = #{record.isshow,jdbcType=INTEGER},
+      </if>
+      <if test="record.dRemark != null">
+        D_Remark = #{record.dRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update delivery_schedules_detail
+    set D_Id = #{record.dId,jdbcType=INTEGER},
+      D_No = #{record.dNo,jdbcType=VARCHAR},
+      D_Order = #{record.dOrder,jdbcType=INTEGER},
+      ContractNo = #{record.contractno,jdbcType=VARCHAR},
+      D_Name = #{record.dName,jdbcType=VARCHAR},
+      D_Type = #{record.dType,jdbcType=VARCHAR},
+      D_Steel = #{record.dSteel,jdbcType=VARCHAR},
+      D_Spec = #{record.dSpec,jdbcType=VARCHAR},
+      D_NPS = #{record.dNps,jdbcType=VARCHAR},
+      D_Quantity = #{record.dQuantity,jdbcType=INTEGER},
+      D_Unit = #{record.dUnit,jdbcType=VARCHAR},
+      D_Number = #{record.dNumber,jdbcType=INTEGER},
+      D_Weight = #{record.dWeight,jdbcType=DECIMAL},
+      D_Numbers = #{record.dNumbers,jdbcType=DECIMAL},
+      D_Weights = #{record.dWeights,jdbcType=DECIMAL},
+      S_Quantity = #{record.sQuantity,jdbcType=INTEGER},
+      S_Unit = #{record.sUnit,jdbcType=VARCHAR},
+      S_Number = #{record.sNumber,jdbcType=INTEGER},
+      S_Weight = #{record.sWeight,jdbcType=DECIMAL},
+      S_Numbers = #{record.sNumbers,jdbcType=DECIMAL},
+      S_Weights = #{record.sWeights,jdbcType=DECIMAL},
+      M_Quantity = #{record.mQuantity,jdbcType=INTEGER},
+      M_Unit = #{record.mUnit,jdbcType=VARCHAR},
+      M_Number = #{record.mNumber,jdbcType=INTEGER},
+      M_Weight = #{record.mWeight,jdbcType=DECIMAL},
+      M_Numbers = #{record.mNumbers,jdbcType=DECIMAL},
+      M_Weights = #{record.mWeights,jdbcType=DECIMAL},
+      R_Quantity = #{record.rQuantity,jdbcType=INTEGER},
+      R_Unit = #{record.rUnit,jdbcType=VARCHAR},
+      R_Number = #{record.rNumber,jdbcType=INTEGER},
+      R_Weight = #{record.rWeight,jdbcType=DECIMAL},
+      R_Numbers = #{record.rNumbers,jdbcType=DECIMAL},
+      R_Weights = #{record.rWeights,jdbcType=DECIMAL},
+      D_External = #{record.dExternal,jdbcType=DECIMAL},
+      D_External_Start = #{record.dExternalStart,jdbcType=VARCHAR},
+      D_External_End = #{record.dExternalEnd,jdbcType=VARCHAR},
+      D_physicochemical = #{record.dPhysicochemical,jdbcType=DECIMAL},
+      D_physicochemical_Start = #{record.dPhysicochemicalStart,jdbcType=VARCHAR},
+      D_physicochemical_End = #{record.dPhysicochemicalEnd,jdbcType=VARCHAR},
+      D_Check = #{record.dCheck,jdbcType=DECIMAL},
+      D_Check_Start = #{record.dCheckStart,jdbcType=VARCHAR},
+      D_Check_End = #{record.dCheckEnd,jdbcType=VARCHAR},
+      D_lossless = #{record.dLossless,jdbcType=DECIMAL},
+      D_lossless_Start = #{record.dLosslessStart,jdbcType=VARCHAR},
+      D_lossless_End = #{record.dLosslessEnd,jdbcType=VARCHAR},
+      D_packaging = #{record.dPackaging,jdbcType=DECIMAL},
+      D_packaging_Start = #{record.dPackagingStart,jdbcType=VARCHAR},
+      D_packaging_End = #{record.dPackagingEnd,jdbcType=VARCHAR},
+      D_percent = #{record.dPercent,jdbcType=INTEGER},
+      D_verify = #{record.dVerify,jdbcType=VARCHAR},
+      D_Check_type = #{record.dCheckType,jdbcType=VARCHAR},
+      D_Standards = #{record.dStandards,jdbcType=VARCHAR},
+      D_Supply = #{record.dSupply,jdbcType=VARCHAR},
+      D_FurnaceNo = #{record.dFurnaceno,jdbcType=VARCHAR},
+      D_HeatNo = #{record.dHeatno,jdbcType=VARCHAR},
+      D_BoxNo = #{record.dBoxno,jdbcType=VARCHAR},
+      D_State = #{record.dState,jdbcType=INTEGER},
+      D_IsSingle = #{record.dIssingle,jdbcType=INTEGER},
+      DeptID = #{record.deptid,jdbcType=INTEGER},
+      IsShow = #{record.isshow,jdbcType=INTEGER},
+      D_Remark = #{record.dRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sss.oem.domain.entity.DeliverySchedulesDetail">
+    update delivery_schedules_detail
+    <set>
+      <if test="dNo != null">
+        D_No = #{dNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dOrder != null">
+        D_Order = #{dOrder,jdbcType=INTEGER},
+      </if>
+      <if test="contractno != null">
+        ContractNo = #{contractno,jdbcType=VARCHAR},
+      </if>
+      <if test="dName != null">
+        D_Name = #{dName,jdbcType=VARCHAR},
+      </if>
+      <if test="dType != null">
+        D_Type = #{dType,jdbcType=VARCHAR},
+      </if>
+      <if test="dSteel != null">
+        D_Steel = #{dSteel,jdbcType=VARCHAR},
+      </if>
+      <if test="dSpec != null">
+        D_Spec = #{dSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="dNps != null">
+        D_NPS = #{dNps,jdbcType=VARCHAR},
+      </if>
+      <if test="dQuantity != null">
+        D_Quantity = #{dQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="dUnit != null">
+        D_Unit = #{dUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="dNumber != null">
+        D_Number = #{dNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dWeight != null">
+        D_Weight = #{dWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="dNumbers != null">
+        D_Numbers = #{dNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="dWeights != null">
+        D_Weights = #{dWeights,jdbcType=DECIMAL},
+      </if>
+      <if test="sQuantity != null">
+        S_Quantity = #{sQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="sUnit != null">
+        S_Unit = #{sUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="sNumber != null">
+        S_Number = #{sNumber,jdbcType=INTEGER},
+      </if>
+      <if test="sWeight != null">
+        S_Weight = #{sWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="sNumbers != null">
+        S_Numbers = #{sNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="sWeights != null">
+        S_Weights = #{sWeights,jdbcType=DECIMAL},
+      </if>
+      <if test="mQuantity != null">
+        M_Quantity = #{mQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="mUnit != null">
+        M_Unit = #{mUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="mNumber != null">
+        M_Number = #{mNumber,jdbcType=INTEGER},
+      </if>
+      <if test="mWeight != null">
+        M_Weight = #{mWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="mNumbers != null">
+        M_Numbers = #{mNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="mWeights != null">
+        M_Weights = #{mWeights,jdbcType=DECIMAL},
+      </if>
+      <if test="rQuantity != null">
+        R_Quantity = #{rQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="rUnit != null">
+        R_Unit = #{rUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="rNumber != null">
+        R_Number = #{rNumber,jdbcType=INTEGER},
+      </if>
+      <if test="rWeight != null">
+        R_Weight = #{rWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="rNumbers != null">
+        R_Numbers = #{rNumbers,jdbcType=DECIMAL},
+      </if>
+      <if test="rWeights != null">
+        R_Weights = #{rWeights,jdbcType=DECIMAL},
+      </if>
+      <if test="dExternal != null">
+        D_External = #{dExternal,jdbcType=DECIMAL},
+      </if>
+      <if test="dExternalStart != null">
+        D_External_Start = #{dExternalStart,jdbcType=VARCHAR},
+      </if>
+      <if test="dExternalEnd != null">
+        D_External_End = #{dExternalEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="dPhysicochemical != null">
+        D_physicochemical = #{dPhysicochemical,jdbcType=DECIMAL},
+      </if>
+      <if test="dPhysicochemicalStart != null">
+        D_physicochemical_Start = #{dPhysicochemicalStart,jdbcType=VARCHAR},
+      </if>
+      <if test="dPhysicochemicalEnd != null">
+        D_physicochemical_End = #{dPhysicochemicalEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="dCheck != null">
+        D_Check = #{dCheck,jdbcType=DECIMAL},
+      </if>
+      <if test="dCheckStart != null">
+        D_Check_Start = #{dCheckStart,jdbcType=VARCHAR},
+      </if>
+      <if test="dCheckEnd != null">
+        D_Check_End = #{dCheckEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="dLossless != null">
+        D_lossless = #{dLossless,jdbcType=DECIMAL},
+      </if>
+      <if test="dLosslessStart != null">
+        D_lossless_Start = #{dLosslessStart,jdbcType=VARCHAR},
+      </if>
+      <if test="dLosslessEnd != null">
+        D_lossless_End = #{dLosslessEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="dPackaging != null">
+        D_packaging = #{dPackaging,jdbcType=DECIMAL},
+      </if>
+      <if test="dPackagingStart != null">
+        D_packaging_Start = #{dPackagingStart,jdbcType=VARCHAR},
+      </if>
+      <if test="dPackagingEnd != null">
+        D_packaging_End = #{dPackagingEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="dPercent != null">
+        D_percent = #{dPercent,jdbcType=INTEGER},
+      </if>
+      <if test="dVerify != null">
+        D_verify = #{dVerify,jdbcType=VARCHAR},
+      </if>
+      <if test="dCheckType != null">
+        D_Check_type = #{dCheckType,jdbcType=VARCHAR},
+      </if>
+      <if test="dStandards != null">
+        D_Standards = #{dStandards,jdbcType=VARCHAR},
+      </if>
+      <if test="dSupply != null">
+        D_Supply = #{dSupply,jdbcType=VARCHAR},
+      </if>
+      <if test="dFurnaceno != null">
+        D_FurnaceNo = #{dFurnaceno,jdbcType=VARCHAR},
+      </if>
+      <if test="dHeatno != null">
+        D_HeatNo = #{dHeatno,jdbcType=VARCHAR},
+      </if>
+      <if test="dBoxno != null">
+        D_BoxNo = #{dBoxno,jdbcType=VARCHAR},
+      </if>
+      <if test="dState != null">
+        D_State = #{dState,jdbcType=INTEGER},
+      </if>
+      <if test="dIssingle != null">
+        D_IsSingle = #{dIssingle,jdbcType=INTEGER},
+      </if>
+      <if test="deptid != null">
+        DeptID = #{deptid,jdbcType=INTEGER},
+      </if>
+      <if test="isshow != null">
+        IsShow = #{isshow,jdbcType=INTEGER},
+      </if>
+      <if test="dRemark != null">
+        D_Remark = #{dRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where D_Id = #{dId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sss.oem.domain.entity.DeliverySchedulesDetail">
+    update delivery_schedules_detail
+    set D_No = #{dNo,jdbcType=VARCHAR},
+      D_Order = #{dOrder,jdbcType=INTEGER},
+      ContractNo = #{contractno,jdbcType=VARCHAR},
+      D_Name = #{dName,jdbcType=VARCHAR},
+      D_Type = #{dType,jdbcType=VARCHAR},
+      D_Steel = #{dSteel,jdbcType=VARCHAR},
+      D_Spec = #{dSpec,jdbcType=VARCHAR},
+      D_NPS = #{dNps,jdbcType=VARCHAR},
+      D_Quantity = #{dQuantity,jdbcType=INTEGER},
+      D_Unit = #{dUnit,jdbcType=VARCHAR},
+      D_Number = #{dNumber,jdbcType=INTEGER},
+      D_Weight = #{dWeight,jdbcType=DECIMAL},
+      D_Numbers = #{dNumbers,jdbcType=DECIMAL},
+      D_Weights = #{dWeights,jdbcType=DECIMAL},
+      S_Quantity = #{sQuantity,jdbcType=INTEGER},
+      S_Unit = #{sUnit,jdbcType=VARCHAR},
+      S_Number = #{sNumber,jdbcType=INTEGER},
+      S_Weight = #{sWeight,jdbcType=DECIMAL},
+      S_Numbers = #{sNumbers,jdbcType=DECIMAL},
+      S_Weights = #{sWeights,jdbcType=DECIMAL},
+      M_Quantity = #{mQuantity,jdbcType=INTEGER},
+      M_Unit = #{mUnit,jdbcType=VARCHAR},
+      M_Number = #{mNumber,jdbcType=INTEGER},
+      M_Weight = #{mWeight,jdbcType=DECIMAL},
+      M_Numbers = #{mNumbers,jdbcType=DECIMAL},
+      M_Weights = #{mWeights,jdbcType=DECIMAL},
+      R_Quantity = #{rQuantity,jdbcType=INTEGER},
+      R_Unit = #{rUnit,jdbcType=VARCHAR},
+      R_Number = #{rNumber,jdbcType=INTEGER},
+      R_Weight = #{rWeight,jdbcType=DECIMAL},
+      R_Numbers = #{rNumbers,jdbcType=DECIMAL},
+      R_Weights = #{rWeights,jdbcType=DECIMAL},
+      D_External = #{dExternal,jdbcType=DECIMAL},
+      D_External_Start = #{dExternalStart,jdbcType=VARCHAR},
+      D_External_End = #{dExternalEnd,jdbcType=VARCHAR},
+      D_physicochemical = #{dPhysicochemical,jdbcType=DECIMAL},
+      D_physicochemical_Start = #{dPhysicochemicalStart,jdbcType=VARCHAR},
+      D_physicochemical_End = #{dPhysicochemicalEnd,jdbcType=VARCHAR},
+      D_Check = #{dCheck,jdbcType=DECIMAL},
+      D_Check_Start = #{dCheckStart,jdbcType=VARCHAR},
+      D_Check_End = #{dCheckEnd,jdbcType=VARCHAR},
+      D_lossless = #{dLossless,jdbcType=DECIMAL},
+      D_lossless_Start = #{dLosslessStart,jdbcType=VARCHAR},
+      D_lossless_End = #{dLosslessEnd,jdbcType=VARCHAR},
+      D_packaging = #{dPackaging,jdbcType=DECIMAL},
+      D_packaging_Start = #{dPackagingStart,jdbcType=VARCHAR},
+      D_packaging_End = #{dPackagingEnd,jdbcType=VARCHAR},
+      D_percent = #{dPercent,jdbcType=INTEGER},
+      D_verify = #{dVerify,jdbcType=VARCHAR},
+      D_Check_type = #{dCheckType,jdbcType=VARCHAR},
+      D_Standards = #{dStandards,jdbcType=VARCHAR},
+      D_Supply = #{dSupply,jdbcType=VARCHAR},
+      D_FurnaceNo = #{dFurnaceno,jdbcType=VARCHAR},
+      D_HeatNo = #{dHeatno,jdbcType=VARCHAR},
+      D_BoxNo = #{dBoxno,jdbcType=VARCHAR},
+      D_State = #{dState,jdbcType=INTEGER},
+      D_IsSingle = #{dIssingle,jdbcType=INTEGER},
+      DeptID = #{deptid,jdbcType=INTEGER},
+      IsShow = #{isshow,jdbcType=INTEGER},
+      D_Remark = #{dRemark,jdbcType=VARCHAR}
+    where D_Id = #{dId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.sss.oem.domain.entity.DeliverySchedulesDetailCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from delivery_schedules_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <cache />
+</mapper>
